@@ -1,8 +1,4 @@
-import pytest
-
-
-@pytest.fixture(scope='session', autouse=True)
-def fix():
+def pytest_sessionstart(session):
     print('---------->')
-    print('----------> session scope fixture executed')
-    print('----------> \n')
+    print('----------> session started')
+    print('---------->')
