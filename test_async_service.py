@@ -1,8 +1,9 @@
 import pytest
 
 from async_service import AsyncService
+from test_case import TestCase
 
-iterations = [x for x in range(5)]
+iterations = [x for x in range(100)]
 
 
 @pytest.mark.asyncio_cooperative
@@ -21,13 +22,8 @@ def test_pytest_concurrent(iteration):
     pass
 
 
-@pytest.mark.test_one
+@pytest.mark.test_module
 @pytest.mark.parametrize('iteration', iterations, ids=iterations)
-def test_one(iteration):
-    pass
-
-
-@pytest.mark.test_two
-@pytest.mark.parametrize('iteration', iterations, ids=iterations)
-def test_two(iteration):
-    pass
+def test_module_fixture_with_concurrency(iteration, parametrized_test_fixture):
+    TestCase.count += 1
+    print(iteration)
