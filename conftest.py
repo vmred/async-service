@@ -1,6 +1,7 @@
 import pytest
 
 from test_case import TestCase
+from variables import iterations_count
 
 
 def pytest_sessionstart(session):
@@ -9,13 +10,13 @@ def pytest_sessionstart(session):
     print('---------->')
 
 
-@pytest.fixture(scope='module')
+@pytest.yield_fixture(scope='module')
 def parametrized_test_fixture():
     print('-->')
     print('module fixture called')
 
-    yield
+    yield True
 
     print('-->')
     print('--> should be printed after all test cases')
-    assert TestCase.count == 100
+    assert TestCase.count == iterations_count

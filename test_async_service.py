@@ -2,8 +2,9 @@ import pytest
 
 from async_service import AsyncService
 from test_case import TestCase
+from variables import iterations_count
 
-iterations = [x for x in range(100)]
+iterations = [x for x in range(iterations_count)]
 
 
 @pytest.mark.asyncio_cooperative
@@ -26,4 +27,19 @@ def test_pytest_concurrent(iteration):
 @pytest.mark.parametrize('iteration', iterations, ids=iterations)
 def test_module_fixture_with_concurrency(iteration, parametrized_test_fixture):
     TestCase.count += 1
-    print(iteration)
+
+
+@pytest.mark.test_without_module
+@pytest.mark.parametrize('iteration', iterations, ids=iterations)
+def test_without_module_fixture(iteration):
+    pass
+
+
+# @pytest.fixture(autouse=True)
+# def autofix(request):
+#     marker_names = {m.name for m in request.node.iter_markers()}
+#     print(marker_names)
+#     # if 'sometimes_please' in marker_names:
+#     #     request.getfixturevalue('sometimes_fixture')
+#     # if 'but_also_skip_ok' in marker_names:
+#     #     pytest.skip('plz skip!')
