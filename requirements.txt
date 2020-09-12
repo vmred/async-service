@@ -4,3 +4,4 @@ grequests
 flask
 pytest-concurrent
 filelock
+pytest-xdist
