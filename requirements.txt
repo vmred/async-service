@@ -1,6 +1,6 @@
 pytest
 requests
 grequests
-pytest-asyncio-cooperative
 flask
 pytest-concurrent
+filelock
