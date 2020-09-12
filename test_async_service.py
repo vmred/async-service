@@ -9,6 +9,7 @@ iterations = [x for x in range(iterations_count)]
 @pytest.mark.test_without_module
 @pytest.mark.parametrize('iteration', iterations, ids=iterations)
 def test_without_module_fixture(iteration):
+    print('running test')
     pass
 
 
@@ -19,7 +20,7 @@ class TestClass1:
 
 
 class TestModule:
-
     @pytest.mark.parametrize('iteration', iterations, ids=iterations)
-    def test_module_fixture_with_concurrency(self, iteration, parametrized_test_fixture, serial):
+    def test_module_fixture_with_concurrency(self, iteration, verify):
+        print('incrementing count')
         TestCase.count += 1

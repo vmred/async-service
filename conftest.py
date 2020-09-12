@@ -3,6 +3,10 @@ import pytest
 from test_case import TestCase
 from variables import iterations_count
 
+import logging
+
+logger = logging.getLogger('foo')
+
 
 def pytest_sessionstart(session):
     print('---------->')
@@ -10,13 +14,9 @@ def pytest_sessionstart(session):
     print('---------->')
 
 
-@pytest.yield_fixture(scope='module')
-def parametrized_test_fixture():
-    print('-->')
-    print('module fixture called')
-
-    yield True
-
-    print('-->')
-    print('--> should be printed after all test cases')
+@pytest.fixture(scope='module')
+def verify():
+    yield
+    print('\n--->')
+    print('teardown')
     assert TestCase.count == iterations_count
