@@ -3,7 +3,7 @@ import pytest
 from test_case import TestCase
 from variables import iterations_count
 
-iterations = [x for x in range(iterations_count)]
+iterations = range(iterations_count)
 
 
 @pytest.mark.test_without_module
@@ -20,6 +20,7 @@ class TestClass1:
 
 
 class TestModule:
+    @pytest.mark.test
     @pytest.mark.parametrize('iteration', iterations, ids=iterations)
     def test_module_fixture_with_concurrency(self, iteration, verify):
         print('incrementing count')
